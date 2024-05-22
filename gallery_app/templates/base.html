@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = 'stylesheet' type = 'text/css' href ="{%  static 'base.css' %}" >
+    <title>Multimedia Handler</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Multimedia Handler</h1>
+    </div>
+    <div class="nav">
+        {%block home_link %} {% endblock %}
+        <a href="{% url 'gallery'%}">Gallery</a>
+        <a href="{% url 'gallery'%}">Videos</a>
+        <a href="{% url 'gallery'%}">Images</a>
+        <a href="{% url 'gallery'%}">Auido</a>
+    </div>
+    <div class="main-content">
+        <img src="your-image-url.jpg" alt="Horror Image">
+        <h1>Welcome  your_name</h1>
+        <p>"Explore the essence of time with your Multimedia handler, capturing fleeting moments and preserving them for future reflection" - JomoCode</p>
+    </div>
+    {% block content %}
+    
+    {% endblock %}
+
+    <div class="footer">
+        <p>&copy; 2024 JomoCode. All rights reserved.</p>
+    </div>
+    <div class="ai-art">JomoCode</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block home_link %} <a href="{% url 'index'%}">Home</a>{% endblock %}
+
+{% block content %}
+{% for items in database %}
+ <img src="{{items.file.url}}" alt="{{items.title}}">
+ <p>{{items.file.url}}</p>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload File</title>
+</head>
+<body>
+    <h1>Upload File</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ success.form.title }}
+        {{ success.form.file }}
+        <button type="submit">Upload</button>
+    </form>
+
+    <div style="width: 200px; background-color: rgb(146, 113, 21); opacity: 0.5;">{{success.success}}</div>
+</body>
+</html>
