@@ -4,11 +4,20 @@
     <title>Upload File</title>
 </head>
 <body>
-    <h1>Upload File</h1>
+    <h1>Upload to Gallery</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ success.form.title }}
-        {{ success.form.file }}
+        {{ form.title }}
+        {{ form.file }}
+        <button type="submit">Upload</button>
+    </form>
+    <h2>customize profile</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.profile }}
+        {{ form.display_photo1 }}
+        {{ form.display_photo2 }}
+        {{ form.display_photo3 }}
         <button type="submit">Upload</button>
     </form>
 

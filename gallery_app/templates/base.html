@@ -12,15 +12,15 @@
         <h1>Multimedia Handler</h1>
     </div>
     <div class="nav">
-        {%block home_link %} {% endblock %}
+        {%block home_link %}<a href="{% url 'upload'%}">Upload</a> {% endblock %}
         <a href="{% url 'gallery'%}">Gallery</a>
         <a href="{% url 'gallery'%}">Videos</a>
         <a href="{% url 'gallery'%}">Images</a>
         <a href="{% url 'gallery'%}">Auido</a>
     </div>
     <div class="main-content">
-        <img src="your-image-url.jpg" alt="Horror Image">
-        <h1>Welcome  your_name</h1>
+       {% block main_pic %} <img src="your-image-url.jpg" alt="Main Image"> {% endblock %}
+         <h1>Welcome  your_name</h1>
         <p>"Explore the essence of time with your Multimedia handler, capturing fleeting moments and preserving them for future reflection" - JomoCode</p>
     </div>
     {% block content %}

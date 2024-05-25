@@ -1,11 +1,35 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 
-{% block home_link %} <a href="{% url 'index'%}">Home</a>{% endblock %}
+   {% extends 'base.html' %}
+    {% load static %}
+    
+    
+    
+    {% block home_link %} <a href="{% url 'index'%}">Home</a>{% endblock %}
+    {% block main_pic %} <img src="{{items.file}}" alt="Main Image"> {% endblock %}
+    {% block content %}
 
-{% block content %}
-{% for items in database %}
- <img src="{{items.file.url}}" alt="{{items.title}}">
- <p>{{items.file.url}}</p>
-{% endfor %}
+    <div style=" margin:50px" >
+        <div>
+            {% for items in database %}
+            <img src="{{items.file.url}}" alt="{{items.title}}" style="width:100px">
+            <p>{{items.title}}</p>
+            {% endfor %}
+            
+          
+        </div> 
+    </div>
+    {% endblock %}
+    
 
-{% endblock %}
+
+
+</body>
+</html>
