@@ -3,33 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gallery</title>
+    <style>
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .gallery img {
+            width: 100px;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+        .gallery p {
+            text-align: center;
+            color: var(--text-color);
+        }
+    </style>
 </head>
 <body>
-
-   {% extends 'base.html' %}
+    {% extends 'base.html' %}
     {% load static %}
     
-    
-    
-    {% block home_link %} <a href="{% url 'index'%}">Home</a>{% endblock %}
-    {% block main_pic %} <img src="{{items.file}}" alt="Main Image"> {% endblock %}
-    {% block content %}
-
-    <div style=" margin:50px" >
-        <div>
-            {% for items in database %}
-            <img src="{{items.file.url}}" alt="{{items.title}}" style="width:100px">
-            <p>{{items.title}}</p>
-            {% endfor %}
-            
-          
-        </div> 
-    </div>
+    {% block home_link %}
+        <a href="{% url 'index' %}">Home</a>
     {% endblock %}
     
-
-
-
+    {% block header%} 
+    <p>"Explore the essence of time with your Multimedia handler, capturing fleeting moments and preserving them for future reflection" - JomoCode</p>
+    
+    {% endblock %}
+    
+    
+    
+    {% block content %}
+    <div class="main-content">
+        <h1>Gallery</h1>
+        <div class="gallery">
+            {% for items in database %}
+                <div>
+                    <img src="{{ items.file.url }}" alt="{{ items.title }}" style="width: 250px; height:250px;">
+                    <p>{{ items.title }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock %}
 </body>
 </html>

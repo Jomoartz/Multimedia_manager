@@ -1,35 +1,169 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = 'stylesheet' type = 'text/css' href ="{%  static 'base.css' %}" >
     <title>Multimedia Handler</title>
+    <style>
+        :root {
+            --bg-color: #000;
+            --text-color: #fff;
+            --header-footer-bg: #1a1a1a;
+            --nav-bg: #333;
+            --link-color: #fff;
+        }
+        [data-theme="light"] {
+            --bg-color: #fff;
+            --text-color: #000;
+            --header-footer-bg: #f0f0f0;
+            --nav-bg: #ccc;
+            --link-color: #000;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header, .footer {
+            background-color: var(--header-footer-bg);
+            padding: 20px;
+            text-align: center;
+        }
+        .nav {
+            display: flex;
+            justify-content: center;
+            background-color: var(--nav-bg);
+            padding: 10px 0;
+            flex-wrap: wrap;
+        }
+        .nav a {
+            color: var(--link-color);
+            margin: 10px;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .nav a:hover {
+            transform: scale(1.1);
+            color: #ff6347; /* Highlight color on hover */
+        }
+        .main-content {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .main-content img {
+            width: 100%;
+            max-width: 600px;
+            transition: transform 0.3s ease;
+        }
+        .main-content img:hover {
+            transform: scale(1.05);
+        }
+        .main-content h1 {
+            font-size: 2.5em;
+            margin: 20px 0;
+        }
+        .main-content p {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .gallery img {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        .ai-art {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 0.8em;
+        }
+        .theme-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: 2px solid var(--text-color);
+            color: var(--text-color);
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .main-content h1 {
+                font-size: 2em;
+            }
+            .gallery img {
+                max-width: 100%;
+                margin: 5px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content h1 {
+                font-size: 1.5em;
+            }
+            .nav a {
+                margin: 5px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="header">
         <h1>Multimedia Handler</h1>
     </div>
+    <button class="theme-toggle" id="theme-toggle">Toggle Theme</button>
     <div class="nav">
-        {%block home_link %}<a href="{% url 'upload'%}">Upload</a> {% endblock %}
-        <a href="{% url 'gallery'%}">Gallery</a>
-        <a href="{% url 'gallery'%}">Videos</a>
-        <a href="{% url 'gallery'%}">Images</a>
-        <a href="{% url 'gallery'%}">Auido</a>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'upload' %}">Upload</a>
+        <a href="{% url 'gallery' %}">Gallery</a>
+        <a href="{% url 'upload' %}">upload</a>
     </div>
     <div class="main-content">
-       {% block main_pic %} <img src="your-image-url.jpg" alt="Main Image"> {% endblock %}
-         <h1>Welcome  your_name</h1>
+        {% block header %}
+       <img src="https://static8.depositphotos.com/1006568/894/i/450/depositphotos_8947776-stock-photo-smart-phone-technology.jpg" alt="Main Image" style="width:250px;">
+        <h1>MuLTIMEDIA HANDLER</h1>
         <p>"Explore the essence of time with your Multimedia handler, capturing fleeting moments and preserving them for future reflection" - JomoCode</p>
+        {% endblock %}
     </div>
     {% block content %}
-    
     {% endblock %}
-
     <div class="footer">
         <p>&copy; 2024 JomoCode. All rights reserved.</p>
     </div>
     <div class="ai-art">JomoCode</div>
+
+    <script>
+        const toggleButton = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        toggleButton.addEventListener('click', () => {
+            const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        });
+    </script>
 </body>
 </html>
