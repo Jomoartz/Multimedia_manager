@@ -3,10 +3,10 @@ from .forms import MediaFileForm
 from .models import MediaFile
 
 
-def base(request):
-    database_content = ProfileImages.objects.all()
-    context = {'database_content': database_content}
-    return render(request, 'base.html', context )
+#def base(request):
+#    database_content = MediaFile.objects.all()
+#    context = {'database_content': database_content}
+#    return render(request, 'base.html', context )
 
 
 def index(request):
