@@ -1,26 +1,46 @@
+:root {
+    --bg-color: #000;
+    --text-color: #fff;
+    --header-footer-bg: #1a1a1a;
+    --nav-bg: #333;
+    --link-color: #fff;
+}
+[data-theme="light"] {
+    --bg-color: #fff;
+    --text-color: #000;
+    --header-footer-bg: #f0f0f0;
+    --nav-bg: #ccc;
+    --link-color: #000;
+}
+
 body {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
 }
 .header, .footer {
-    background-color: #1a1a1a;
+    background-color: var(--header-footer-bg);
     padding: 20px;
     text-align: center;
 }
 .nav {
     display: flex;
     justify-content: center;
-    background-color: #333;
+    background-color: var(--nav-bg);
     padding: 10px 0;
     flex-wrap: wrap;
 }
 .nav a {
-    color: #fff;
+    color: var(--link-color);
     margin: 10px;
     text-decoration: none;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+.nav a:hover {
+    transform: scale(1.1);
+    color: #ff6347; /* Highlight color on hover */
 }
 .main-content {
     text-align: center;
@@ -29,6 +49,10 @@ body {
 .main-content img {
     width: 100%;
     max-width: 600px;
+    transition: transform 0.3s ease;
+}
+.main-content img:hover {
+    transform: scale(1.05);
 }
 .main-content h1 {
     font-size: 2.5em;
@@ -49,6 +73,10 @@ body {
     width: 100%;
     max-width: 300px;
     margin: 10px;
+    transition: transform 0.3s ease;
+}
+.gallery img:hover {
+    transform: scale(1.05);
 }
 .ai-art {
     position: absolute;
@@ -59,6 +87,18 @@ body {
     border-radius: 5px;
     color: #fff;
     font-size: 0.8em;
+}
+.theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Responsive Styles */
@@ -80,4 +120,3 @@ body {
         margin: 5px;
     }
 }
-

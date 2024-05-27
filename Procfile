@@ -1,0 +1,1 @@
+web: gunicorn MULTIMEDIA_MANAGER.wsgi:application --log-file-
