@@ -14,33 +14,35 @@ from pathlib import Path
 import os
 import django_heroku
 import dj_database_url
-#import secrets
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-c!x9bv#_7@ic%+k14jn(-ofonpzyv4f3(#&lmv0@h8@0(c0at9'
+
 IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
+if IS_HEROKU_APP:
+    print("Running on Heroku")
+else:
+    print("Not running on Heroku")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if not IS_HEROKU_APP:
     DEBUG = True
-
-if IS_HEROKU_APP:
-    ALLOWED_HOSTS = ["*"]
 else:
-    ALLOWED_HOSTS = []
+    DEBUG = False
+
+ALLOWED_HOSTS = ["*"] if IS_HEROKU_APP else []
 
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',  # Added comma here
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,7 +54,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Added comma here
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -88,20 +90,19 @@ WSGI_APPLICATION = 'Multimedia_manager.wsgi.application'
 if IS_HEROKU_APP:
     DATABASES = {
         'default': dj_database_url.config(
-            env = 'DATABASE_URL',
-            conn_max_age = 600,
-            conn_health_checks = True,
-            ssl_require = True,
+            env='DATABASE_URL',
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=True,
         ),
-        }
+    }
 else:
     DATABASES = {
         'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-            }
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
-
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -144,9 +145,13 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
+# Whitenoise Configuration
 WHITENOISE_KEEP_ONLY_HASHED_FILES = True
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Activate Django-Heroku.
 django_heroku.settings(locals())
