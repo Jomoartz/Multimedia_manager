@@ -1,1 +1,1 @@
-web: gunicorn MULTIMEDIA_MANAGER.wsgi:application 
+web: gunicorn Multimedia_manager.wsgi:application
